@@ -2,7 +2,6 @@ package ru.bogdan.testtaskvodovoz.data.web.model
 
 
 import com.google.gson.annotations.SerializedName
-import ru.bogdan.testtaskvodovoz.data.web.model.Data
 
 data class Tovary(
     @SerializedName("data")

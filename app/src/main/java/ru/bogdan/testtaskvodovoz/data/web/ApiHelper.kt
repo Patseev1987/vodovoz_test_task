@@ -6,7 +6,6 @@ import ru.bogdan.testtaskvodovoz.data.web.model.ResponseVodovoz
 
 
 interface ApiHelper {
-
     fun getResponseVodovoz(): Flow<ResponseVodovoz>
-
+    fun updateData()
 }

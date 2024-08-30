@@ -10,8 +10,8 @@ data class ResponseVodovoz(
     val status: String,
     @SerializedName("TOVARY")
     val tovary: List<Tovary>
-){
-    companion object{
+) {
+    companion object {
         const val SUCCESS = "Success"
         const val ERROR = "Error"
     }

@@ -7,6 +7,5 @@ data class VodovozResponse(
 ) {
     companion object {
         const val SUCCESS = "Success"
-        const val ERROR = "Error"
     }
 }
