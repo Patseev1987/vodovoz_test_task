@@ -11,5 +11,4 @@ class DiffCallbackProduct : DiffUtil.ItemCallback<Product>() {
     override fun areContentsTheSame(p0: Product, p1: Product): Boolean {
         return p0 == p1
     }
-    
 }

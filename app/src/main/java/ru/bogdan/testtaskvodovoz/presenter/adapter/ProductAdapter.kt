@@ -15,9 +15,8 @@ class ProductAdapter(private val onClickListener: ((Product) -> Unit)? = null) :
     ) {
     
     override fun onBindViewHolder(p0: ProductViewHolder, p1: Int) {
-        val tool = getItem(p1)
-        p0.bind(tool, onClickListener)
-        
+        val product = getItem(p1)
+        p0.bind(product, onClickListener)
     }
     
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ProductViewHolder {

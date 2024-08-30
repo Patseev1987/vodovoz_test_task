@@ -9,21 +9,19 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import ru.bogdan.testtaskvodovoz.data.ApplicationRepositoryImpl
-import ru.bogdan.testtaskvodovoz.data.web.ApiFactory
-import ru.bogdan.testtaskvodovoz.data.web.ApiHelperImpl
+import ru.bogdan.testtaskvodovoz.domain.GetVodovozResponseUseCase
+import ru.bogdan.testtaskvodovoz.domain.UpdateDataUseCase
 import ru.bogdan.testtaskvodovoz.domain.VodovozResponse
+import javax.inject.Inject
 
-class MainViewModel(
-    // private val getVodovozResponseUseCase: GetVodovozResponseUseCase
+class MainViewModel @Inject constructor(
+     private val getVodovozResponseUseCase: GetVodovozResponseUseCase,
+    private val updateDataUseCase: UpdateDataUseCase
 ) : ViewModel() {
-    
-    val apiHelperImpl = ApiHelperImpl(ApiFactory.apiService)
-    val applicationRep = ApplicationRepositoryImpl(apiHelperImpl)
     
     private val sharedFlow = MutableSharedFlow<MainUIState>()
     
-    val state = applicationRep.getVodovozResponse()
+    val state = getVodovozResponseUseCase()
         .map {
             MainUIState(
                 goods = it.goods,
@@ -39,7 +37,7 @@ class MainViewModel(
         )
     
     fun updateData() {
-        applicationRep.updateData()
+        updateDataUseCase.update()
     }
     
     fun makeError() {
