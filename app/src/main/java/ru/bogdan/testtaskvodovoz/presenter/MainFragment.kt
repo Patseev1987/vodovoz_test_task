@@ -11,17 +11,26 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import kotlinx.coroutines.launch
 import ru.bogdan.testtaskvodovoz.R
 import ru.bogdan.testtaskvodovoz.databinding.FragmentMainBinding
+import ru.bogdan.testtaskvodovoz.di.DaggerApplicationComponent
 import ru.bogdan.testtaskvodovoz.domain.Goods
+import javax.inject.Inject
 
 
 class MainFragment : Fragment(R.layout.fragment_main) {
     private val binding by viewBinding(FragmentMainBinding::bind)
+    @Inject
+    lateinit var viewModelFactory:ViewModelFactory
+    
+    private val component = DaggerApplicationComponent.create()
+    
+    
     private val viewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
+        ViewModelProvider(this, factory = viewModelFactory)[MainViewModel::class.java]
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        component.inject(this)
         observeViewModel()
     }
     

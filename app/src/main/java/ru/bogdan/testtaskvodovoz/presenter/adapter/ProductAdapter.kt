@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import ru.bogdan.testtaskvodovoz.R
 import ru.bogdan.testtaskvodovoz.databinding.ItemProductBinding
 import ru.bogdan.testtaskvodovoz.domain.Product
 
@@ -15,9 +16,8 @@ class ProductAdapter(private val onClickListener: ((Product) -> Unit)? = null) :
     ) {
     
     override fun onBindViewHolder(p0: ProductViewHolder, p1: Int) {
-        val tool = getItem(p1)
-        p0.bind(tool, onClickListener)
-        
+        val product = getItem(p1)
+        p0.bind(product, onClickListener)
     }
     
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ProductViewHolder {
@@ -32,6 +32,7 @@ class ProductAdapter(private val onClickListener: ((Product) -> Unit)? = null) :
             with(binding) {
                 Glide.with(root)
                     .load(product.picture)
+                    .placeholder(R.drawable.vodovoz_icon)
                     .centerInside()
                     .into(image)
                 

@@ -1,5 +1,7 @@
 package ru.bogdan.testtaskvodovoz.domain
 
-class GetVodovozResponseUseCase(private val repository: ApplicationRepository) {
+import javax.inject.Inject
+
+class GetVodovozResponseUseCase @Inject constructor(private val repository: ApplicationRepository) {
     operator fun invoke() = repository.getVodovozResponse()
 }
