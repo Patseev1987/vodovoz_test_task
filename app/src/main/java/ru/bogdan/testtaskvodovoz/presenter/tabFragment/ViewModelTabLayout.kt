@@ -1,10 +1,10 @@
 package ru.bogdan.testtaskvodovoz.presenter.tabFragment
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import ru.bogdan.testtaskvodovoz.domain.Goods
+import ru.bogdan.testtaskvodovoz.domain.Product
 import javax.inject.Inject
 
 class ViewModelTabLayout @Inject constructor() : ViewModel() {
@@ -19,16 +19,32 @@ class ViewModelTabLayout @Inject constructor() : ViewModel() {
     
     fun getCategoryName(): List<String> = goods.map { it.categoryTitle }
     
-    fun getProductsInCategory(title: String) {
+    fun getProductsInCategory(title: String, position: Int? = null) {
         _state.value = TabLayoutState.Loading
         val products = goods.first { it.categoryTitle == title }.goods
-        _state.value = TabLayoutState.Result(products)
+        _state.value = TabLayoutState.Result(products, position)
     }
     
     private fun getProductInFirstCategory() {
         _state.value = TabLayoutState.Loading
         val products = goods[0].goods
         _state.value = TabLayoutState.Result(products)
-        Log.d("TAG", "getProductInFirstCategory")
     }
+    
+    fun changeFavoriteIcon(product: Product, position: Int) {
+        var ctg = ""
+        goods = goods.map {
+            it.goods.map { prd ->
+                if (prd == product) {
+                    ctg = it.categoryTitle
+                    prd.isFavorite = !prd.isFavorite
+                }
+                prd
+            }
+            it
+        }
+        getProductsInCategory(ctg, position)
+        
+    }
+    
 }
