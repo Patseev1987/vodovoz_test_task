@@ -14,11 +14,12 @@ interface DataModule {
     @ApplicationScope
     @Binds
     fun bindApplicationRepository(impl: ApplicationRepositoryImpl): ApplicationRepository
+    
     @ApplicationScope
     @Binds
     fun bindApiHelper(impl: ApiHelperImpl): ApiHelper
-
-    companion object{
+    
+    companion object {
         @Provides
         fun provideApiService() = ApiFactory.apiService
     }

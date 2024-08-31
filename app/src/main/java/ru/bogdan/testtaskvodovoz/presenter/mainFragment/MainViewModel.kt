@@ -1,4 +1,4 @@
-package ru.bogdan.testtaskvodovoz.presenter
+package ru.bogdan.testtaskvodovoz.presenter.mainFragment
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,7 +15,7 @@ import ru.bogdan.testtaskvodovoz.domain.VodovozResponse
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-     private val getVodovozResponseUseCase: GetVodovozResponseUseCase,
+    private val getVodovozResponseUseCase: GetVodovozResponseUseCase,
     private val updateDataUseCase: UpdateDataUseCase
 ) : ViewModel() {
     

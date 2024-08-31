@@ -1,4 +1,4 @@
-package ru.bogdan.testtaskvodovoz.presenter
+package ru.bogdan.testtaskvodovoz.presenter.mainFragment
 
 
 import ru.bogdan.testtaskvodovoz.domain.Goods

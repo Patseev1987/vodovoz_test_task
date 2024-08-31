@@ -1,4 +1,4 @@
-package ru.bogdan.testtaskvodovoz.presenter
+package ru.bogdan.testtaskvodovoz.presenter.photoFragment
 
 import android.os.Bundle
 import android.view.View

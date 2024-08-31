@@ -8,7 +8,8 @@ import ru.bogdan.testtaskvodovoz.domain.VodovozResponse
 import ru.bogdan.testtaskvodovoz.util.toVodovozResponse
 import javax.inject.Inject
 
-class ApplicationRepositoryImpl @Inject constructor(private val apiHelper: ApiHelper) : ApplicationRepository {
+class ApplicationRepositoryImpl @Inject constructor(private val apiHelper: ApiHelper) :
+    ApplicationRepository {
     override fun getVodovozResponse(): Flow<VodovozResponse> {
         return apiHelper.getResponseVodovoz().map { it.toVodovozResponse() }
     }

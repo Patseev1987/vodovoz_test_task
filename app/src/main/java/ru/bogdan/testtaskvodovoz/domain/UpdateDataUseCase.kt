@@ -3,7 +3,7 @@ package ru.bogdan.testtaskvodovoz.domain
 import javax.inject.Inject
 
 class UpdateDataUseCase @Inject constructor(private val applicationRepository: ApplicationRepository) {
-     fun update() {
+    fun update() {
         applicationRepository.updateData()
     }
 }

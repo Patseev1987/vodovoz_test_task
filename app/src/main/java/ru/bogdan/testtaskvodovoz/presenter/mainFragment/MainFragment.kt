@@ -1,4 +1,4 @@
-package ru.bogdan.testtaskvodovoz.presenter
+package ru.bogdan.testtaskvodovoz.presenter.mainFragment
 
 import android.os.Bundle
 import android.view.View
@@ -13,13 +13,16 @@ import ru.bogdan.testtaskvodovoz.R
 import ru.bogdan.testtaskvodovoz.databinding.FragmentMainBinding
 import ru.bogdan.testtaskvodovoz.di.DaggerApplicationComponent
 import ru.bogdan.testtaskvodovoz.domain.Goods
+import ru.bogdan.testtaskvodovoz.presenter.ViewModelFactory
+import ru.bogdan.testtaskvodovoz.presenter.tabFragment.TabFragment
 import javax.inject.Inject
 
 
 class MainFragment : Fragment(R.layout.fragment_main) {
     private val binding by viewBinding(FragmentMainBinding::bind)
+    
     @Inject
-    lateinit var viewModelFactory:ViewModelFactory
+    lateinit var viewModelFactory: ViewModelFactory
     
     private val component = DaggerApplicationComponent.create()
     
