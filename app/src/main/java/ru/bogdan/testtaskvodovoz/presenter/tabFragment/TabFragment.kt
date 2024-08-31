@@ -59,7 +59,7 @@ class TabFragment : Fragment(R.layout.fragment_tab) {
     }
     
     private fun initView() {
-        adapter = ProductAdapter {
+        adapter = ProductAdapter(onClickListener = {
             requireActivity().supportFragmentManager
                 .beginTransaction()
                 .addToBackStack(null)
@@ -68,19 +68,23 @@ class TabFragment : Fragment(R.layout.fragment_tab) {
                     PhotosFragment.getFragment(it.photos?.photos ?: listOf())
                 )
                 .commit()
-        }
+        },
+            onFavoriteClickListener = { product, position ->
+                viewModel.changeFavoriteIcon(product, position)
+            }
+        )
         adapter.submitList(listOf())
         with(binding) {
             goodsRc.adapter = adapter
             
-            viewModel.getCategoryName().forEach() { title ->
+            viewModel.getCategoryName().forEach { title ->
                 tabLayout.addTab(tabLayout.newTab().setText(title))
             }
             
             tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     val title =
-                        tab?.text.toString() ?: throw IllegalArgumentException("Unknown tab title")
+                        tab?.text.toString()
                     viewModel.getProductsInCategory(title)
                 }
                 
@@ -108,6 +112,13 @@ class TabFragment : Fragment(R.layout.fragment_tab) {
                         
                         is TabLayoutState.Result -> {
                             binding.progressbar.visibility = View.GONE
+                            if (state.position == null) {
+                                adapter.submitList(null)
+                            }
+                            state.position?.let { psn ->
+                                adapter.submitList(state.products)
+                                adapter.notifyItemChanged(psn, Unit)
+                            }
                             adapter.submitList(state.products)
                         }
                     }
