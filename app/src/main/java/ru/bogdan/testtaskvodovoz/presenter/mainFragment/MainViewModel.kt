@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.stateIn
@@ -29,6 +30,7 @@ class MainViewModel @Inject constructor(
                 message = it.message
             )
         }
+        .catch { MainUIState(isSuccess = false) }
         .mergeWith(sharedFlow)
         .stateIn(
             viewModelScope,
